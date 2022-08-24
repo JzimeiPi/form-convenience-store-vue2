@@ -9,6 +9,14 @@ const routes = [
     name: "index",
     component: () =>
       import(/* webpackChunkName: 'index' */ "../views/index.vue"),
+    children: [
+      {
+        path: "form/:id",
+        name: 'formDesign',
+        component: () =>
+          import(/* webpackChunkName: 'formDesign' */ "../views/formDesign/index.vue"),
+      }
+    ]
   },
 ];
 

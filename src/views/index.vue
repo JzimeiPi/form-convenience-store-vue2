@@ -5,13 +5,10 @@
         <Header></Header>
       </div>
       <div class="container-main">
-        <!-- <div class="aside" :class="hide && 'aside-hide'"> -->
         <Aside></Aside>
-        <!-- <div class="icon-hide" @click="onHide">
-            <i class="el-icon-arrow" :class="hide ? 'el-icon-arrow-right' : 'el-icon-arrow-left'"></i>
-          </div> -->
-        <!-- </div> -->
-        <div class="main">Main</div>
+        <div class="main">
+          <router-view></router-view>
+        </div>
       </div>
     </div>
   </div>

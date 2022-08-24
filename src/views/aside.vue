@@ -4,7 +4,7 @@
       <i :class="isCollapse ? 'el-icon-s-fold' : 'el-icon-s-unfold'" @click="foldMenu"></i>
       <el-button size="small" v-show="!isCollapse && fromState === 'design'" @click="addMenu">添加菜单</el-button>
     </div>
-    <el-menu class="el-menu-vertical-demo" :collapse="isCollapse">
+    <el-menu class="el-menu-vertical-demo" :collapse="isCollapse" router>
       <el-submenu v-for="(item, index) in menuList" :key="index" :index="item.id">
         <template slot="title">
           <i :class="item.menuIcon"></i>
@@ -33,7 +33,7 @@
                   @click.prevent.stop="edit(child, i)"></i>
               </el-popover>
             </template>
-            <el-menu-item v-for="(c2, j) in child.children" :key="j" :index="c2.id">
+            <el-menu-item v-for="(c2, j) in child.children" :key="j" :index="c2.id" :route="getRoute(c2)">
               <template slot="title">
                 <span class="menu-content menu-content-3" slot="title">{{ c2.menuName }}</span>
                 <el-popover placement="bottom" trigger="click" popper-class="el-popover-block">
@@ -44,7 +44,7 @@
               </template>
             </el-menu-item>
           </el-submenu>
-          <el-menu-item v-else :key="child.id" :index="child.id">
+          <el-menu-item v-else :key="child.id" :index="child.id" :route="getRoute(child)">
             <template slot="title">
               <span class="menu-content menu-content-2" slot="title">{{ child.menuName }}</span>
               <el-popover placement="bottom" trigger="click" popper-class="el-popover-block">
@@ -105,6 +105,11 @@ export default {
     this.getMenuList()
   },
   methods: {
+    getRoute(item) {
+      return {
+        path: `form/${item.id}`
+      }
+    },
     foldMenu() {
       this.isCollapse = !this.isCollapse
     },
